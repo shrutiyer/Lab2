@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">PhotoStream</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="api_key">AIzaSyB3HVwkKcTxnx0RTOKnSpgKVICbO_tgFCc</string>
+    <string name="search_id">003595003396096289737:n_6yb0ixa4k</string>
 </resources>
