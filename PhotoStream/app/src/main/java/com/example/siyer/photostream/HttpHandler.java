@@ -10,7 +10,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 //Handles all the http requests
 public class HttpHandler {
@@ -23,10 +27,10 @@ public class HttpHandler {
         searchqueue = Volley.newRequestQueue(context);
     }
 
-    public void searchGoogle(String searchQuery) {
+    public void searchGoogle(String searchQuery, final Callback callback) {
         String url = "https://www.googleapis.com/customsearch/v1?key="+ API_KEY +"&cx="+CSE_ID;
         searchQuery = searchQuery.replaceAll(" ", "+");
-        url = url+"&q="+searchQuery+"&type=track";
+        url = url+"&q="+searchQuery+"&searchType=image";
 
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -35,7 +39,11 @@ public class HttpHandler {
                 new Response.Listener<JSONObject>(){
                     @Override
                     public void onResponse(JSONObject response) {
-                        // do something with response
+                        List<String> urlList = new ArrayList<String>();
+                        //JSONObject res = new JSONObject(response)
+                        String item = "items";
+                        JSONArray urlJson = response.getJSONArray(item);
+                        callback.resultsCallback(new ArrayList<String>());
                         Log.d("Response", response.toString());
                     }
                 },
@@ -47,6 +55,7 @@ public class HttpHandler {
                 }
         );
         searchqueue.add(request);
+        return;
     }
 }
 
