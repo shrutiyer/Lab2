@@ -18,11 +18,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        //ViewGroup fragment =
+
         SearchFragment fragment = new SearchFragment();
         fragmentTransaction.add(R.id.fragment, fragment);
         fragmentTransaction.commit();
-
     }
 
 
@@ -46,5 +45,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void changeToSearch() {
+        FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
+        SearchFragment fragment = new SearchFragment();
+        fTrac.replace(R.id.fragment, fragment);
+        fTrac.commit();
+    }
+
+    public void changeToColl()  {
+        FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
+        CollectionFragment fragment = new CollectionFragment();
+        fTrac.replace(R.id.fragment, fragment);
+        fTrac.commit();
     }
 }
