@@ -1,9 +1,14 @@
 package com.example.siyer.photostream;
 
+import android.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -11,6 +16,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        SearchFragment fragment = new SearchFragment();
+        fragmentTransaction.add(R.id.fragment, fragment);
+        fragmentTransaction.commit();
     }
 
 
@@ -34,5 +45,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    public void changeToSearch() {
+        FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
+        SearchFragment fragment = new SearchFragment();
+        fTrac.replace(R.id.fragment, fragment);
+        fTrac.commit();
+    }
+
+    public void changeToColl()  {
+        FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
+        CollectionFragment fragment = new CollectionFragment();
+        fTrac.replace(R.id.fragment, fragment);
+        fTrac.commit();
     }
 }
