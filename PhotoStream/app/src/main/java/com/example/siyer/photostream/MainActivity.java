@@ -10,7 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    public ArrayList<String> collectionUrl = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

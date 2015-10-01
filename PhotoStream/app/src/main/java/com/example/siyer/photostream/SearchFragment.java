@@ -23,13 +23,16 @@ public class SearchFragment extends Fragment {
     public int urlIndex = 0;
     public ArrayList<String> urlList;
     public WebView webImgView;
-    ArrayList<String> collectionURL = new ArrayList<String>();
-
+    public ArrayList<String> collectionURL;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.fragment_main, container, false);
+
+        MainActivity activity = (MainActivity)getActivity();
+        collectionURL = activity.collectionUrl;
+
         final View search_but = rootview.findViewById(R.id.search_button);//Listener for search button
         search_but.setOnClickListener(new View.OnClickListener() {
             @Override

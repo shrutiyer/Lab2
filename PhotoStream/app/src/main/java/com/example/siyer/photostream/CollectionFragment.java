@@ -1,5 +1,6 @@
 package com.example.siyer.photostream;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -19,15 +20,18 @@ import java.util.ArrayList;
 public class CollectionFragment extends Fragment {
     public WebView webFeedView;
     public int feedIndex =0;
-    ArrayList<String> collectionUrl = new ArrayList<String>();
+    public ArrayList<String> collectionUrl;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View rootview = inflater.inflate(R.layout.collection_fragment, container, false);
 
-        Log.d("Init feedIndex",String.valueOf(feedIndex));
-        Log.d("Init List", collectionUrl.toString());
+        Log.d("Init feedIndex", String.valueOf(feedIndex));
+        MainActivity activity = (MainActivity) getActivity();
+        collectionUrl = activity.collectionUrl;
+
+        Log.d("Init List", activity.collectionUrl.toString());
         final View next_but = rootview.findViewById(R.id.next_button_fd);
         next_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +45,20 @@ public class CollectionFragment extends Fragment {
                 Log.d("Index next changed", String.valueOf(feedIndex));
 
                 getImageFromColl(collectionUrl);
+            }
+        });
+
+        final View rem_but = rootview.findViewById(R.id.remove_button_fd);
+        rem_but.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (collectionUrl.size()>=2) {
+                    collectionUrl.remove(feedIndex);
+                    feedIndex -=1;
+                    getImageFromColl(collectionUrl);}
+                else{
+                    webFeedView.loadUrl("http://www.clickertraining.com/files/u1/lab_puppy_250.jpg");
+                }
             }
         });
 
