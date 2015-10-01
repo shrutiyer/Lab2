@@ -89,6 +89,9 @@ public class SearchFragment extends Fragment {
                     mDbHelper.writeDatabase(urlList.get(urlIndex));
                     collectionURL.add(urlList.get(urlIndex));
                     Log.d("collection", collectionURL.toString());
+                    Toast.makeText(getActivity().getBaseContext(), "Added",Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(getActivity().getBaseContext(), "Already in the collection",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -102,7 +105,7 @@ public class SearchFragment extends Fragment {
         });
 
         webImgView = (WebView) rootview.findViewById(R.id.webView);
-        webImgView.loadUrl("https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg");
+        webImgView.loadUrl(getString(R.string.default_img));
         return rootview;
     }
 

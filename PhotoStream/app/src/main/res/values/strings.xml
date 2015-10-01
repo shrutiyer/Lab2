@@ -4,4 +4,6 @@
     <string name="action_settings">Settings</string>
     <string name="api_key">AIzaSyB3HVwkKcTxnx0RTOKnSpgKVICbO_tgFCc</string>
     <string name="search_id">003595003396096289737:n_6yb0ixa4k</string>
+    <string name="default_img">https://upload.wikimedia.org/wikipedia/commons/7/70/Solid_white.svg</string>
+    <string name="no_image">http://epaper2.mid-day.com/images/no_image_thumb.gif</string>
 </resources>
