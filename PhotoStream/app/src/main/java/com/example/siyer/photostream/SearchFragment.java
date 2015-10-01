@@ -24,6 +24,7 @@ public class SearchFragment extends Fragment {
     public ArrayList<String> urlList;
     public WebView webImgView;
     public ArrayList<String> collectionURL;
+    CollDbHelper mDbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,6 +85,8 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!collectionURL.contains(urlList.get(urlIndex))) {
+                    mDbHelper = new CollDbHelper(getActivity().getBaseContext()); //initialize database
+                    mDbHelper.writeDatabase(urlList.get(urlIndex));
                     collectionURL.add(urlList.get(urlIndex));
                     Log.d("collection", collectionURL.toString());
                 }

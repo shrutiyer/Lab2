@@ -21,6 +21,7 @@ public class CollectionFragment extends Fragment {
     public WebView webFeedView;
     public int feedIndex =0;
     public ArrayList<String> collectionUrl;
+    CollDbHelper mDbHelper;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,10 +29,13 @@ public class CollectionFragment extends Fragment {
         final View rootview = inflater.inflate(R.layout.collection_fragment, container, false);
 
         Log.d("Init feedIndex", String.valueOf(feedIndex));
-        MainActivity activity = (MainActivity) getActivity();
-        collectionUrl = activity.collectionUrl;
+        //MainActivity activity = (MainActivity) getActivity();
+        //collectionUrl = activity.collectionUrl; //TODO Uncomment these
 
-        Log.d("Init List", activity.collectionUrl.toString());
+        mDbHelper = new CollDbHelper(getActivity());
+        collectionUrl = mDbHelper.readDatabase();
+
+        Log.d("Init List", collectionUrl.toString());
         final View next_but = rootview.findViewById(R.id.next_button_fd);
         next_but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,6 +57,7 @@ public class CollectionFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (collectionUrl.size()>=2) {
+                    mDbHelper.deleteDatabase(collectionUrl.get(feedIndex));
                     collectionUrl.remove(feedIndex);
                     feedIndex -=1;
                     getImageFromColl(collectionUrl);}
