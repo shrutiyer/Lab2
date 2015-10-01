@@ -1,14 +1,12 @@
 package com.example.siyer.photostream;
 
-import android.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 
 import java.util.ArrayList;
 
@@ -19,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Fragment transaction for switching between fragments
         setContentView(R.layout.activity_main);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -50,13 +49,14 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    //Changes to the SEARCH fragment from the COLLECTION
     public void changeToSearch() {
         FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
         SearchFragment fragment = new SearchFragment();
         fTrac.replace(R.id.fragment, fragment);
         fTrac.commit();
     }
-
+    //Changes to the COLLECTION fragment from the SEARCH fragment
     public void changeToColl()  {
         FragmentTransaction fTrac = getSupportFragmentManager().beginTransaction();
         CollectionFragment fragment = new CollectionFragment();

@@ -4,6 +4,7 @@ import android.provider.BaseColumns;
 
 /**
  * Created by siyer on 9/30/2015.
+ * Schema for the database
  */
 public class CollectionSchema {
     public CollectionSchema(){}

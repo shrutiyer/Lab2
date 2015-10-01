@@ -9,13 +9,14 @@ import android.util.Log;
 
 /**
  * Created by siyer on 9/30/2015.
+ * Database methods to create/add/delete from the SQL dtatbase
  */
 import com.example.siyer.photostream.CollectionSchema.CollTable;
 
 import java.util.ArrayList;
 
 public class CollDbHelper extends SQLiteOpenHelper {
-    // If you change the database schema, you must increment the database version.
+
     public static final int DATABASE_VERSION = 5;
     public static final String DATABASE_NAME = "FeedReader.db";
 
@@ -50,31 +51,29 @@ public class CollDbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<String> readDatabase(){
-
+        //Read the database and return all the entries in the form of a list
         SQLiteDatabase readDBase = getReadableDatabase();
         ArrayList<String> collectionUrl = new ArrayList<>();
         String[] projection = {
                 CollTable.URL_ID,
                 CollTable.URL_COLUMN};
 
-        Cursor cursor = readDBase.query(CollTable.TABLE_NAME, projection,                               // The columns to return
+        Cursor cursor = readDBase.query(CollTable.TABLE_NAME, projection,
                 null,null,null,null,null
         );
 
-        cursor.moveToFirst();
+        cursor.moveToFirst(); //move the read cursor to the start
 
         if (cursor.moveToFirst()) {
             do {
                 collectionUrl.add(cursor.getString(1));
             } while (cursor.moveToNext());
         }
-
-        Log.d("getAllURLs", collectionUrl.toString());
-
         return collectionUrl;
     }
 
     public void deleteDatabase(String url){
+        //Delete the entry that has been removed from the collection
         SQLiteDatabase deleteDBase = getWritableDatabase();
 
         String selection = CollTable.URL_COLUMN + " LIKE ? ";
